@@ -1,0 +1,92 @@
+<template>
+  <div>
+    <v-card flat class="border">
+    <v-list two-line
+          max-height="80vh"
+          class="overflow-y-auto p-1"
+    >
+    <v-container class="d-flex flex-nowrap justify-space-between border-bottom w-100"
+      v-for="organization in organizations" :key="organization.id"
+    >
+      <div>
+        <v-list-item
+            two-line>
+          <v-list-item-content>
+            <v-list-item-subtitle>
+              {{ organization.type_of_organization }}
+            </v-list-item-subtitle>
+            <v-list-item-title class="headline text-wrap">
+              {{ organization.organization_name }}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              {{ organization.registered_province }} -
+              {{ organization.registered_district }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-chip-group>
+          <v-chip v-bind:key="thematic_field.id" v-for="thematic_field in organization.related_thematic_fields">
+            {{ thematic_field.thematic_field_name }}
+          </v-chip>
+        </v-chip-group>
+
+        <v-card-actions>
+          <v-btn text color="primary" :to="'organizations/' + organization.id">
+            Gör
+          </v-btn>
+        </v-card-actions>
+        </div>
+
+        <v-avatar
+          class="ma-3"
+          size="75"
+          circle
+        >
+          <v-img :src="organization.logo"></v-img>
+        </v-avatar>
+    </v-container>
+    </v-list>
+  </v-card>
+    <v-skeleton-loader
+    v-show="loading"
+    type="article, actions"
+  ></v-skeleton-loader>
+  </div>
+
+</template>
+
+<script>
+// import OrganizationDataService from "@/services/organizationDataService"
+
+export default {
+  name: "OrganizationList",
+  data () {
+    return {
+      loading: true,
+    }
+  },
+  props: {
+    organizations: {
+      type: Array,
+      default () {
+        return this.organizations
+      }
+    }
+  },
+  mounted() {
+    // OrganizationDataService.getAll()
+    //   .then(
+    //       response => {this.organizations = response.data;},
+    //   )
+  },
+  updated() {
+    this.$nextTick(function () {
+      console.log("Loaded now")
+      this.loading = false
+    })
+  },
+  methods: {
+
+  }
+}
+</script>

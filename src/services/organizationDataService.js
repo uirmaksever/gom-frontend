@@ -8,10 +8,11 @@ class OrganizationDataService {
     getForProvince(province_select) {
         console.log(province_select);
         let params = new URLSearchParams();
-        for (let key of Object.keys(province_select)) {
-            console.log(key)
-            params.append("registered_province", province_select[key])
-        }
+        params.append("registered_province", province_select)
+        // for (let key of Object.keys(province_select)) {
+        //     console.log(key)
+        //     params.append("registered_province", province_select[key])
+        // }
         console.log(params.toString())
         return http.get("/organizations/?", {params:params})
     }

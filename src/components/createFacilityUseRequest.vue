@@ -22,9 +22,9 @@
     <h5>{{ facility.facility_name }}</h5>
 
   </v-alert>
-  <v-alert rounded outlined type="warning" v-if="error_response">
-    <p v-for="field_error in error_response" v-bind:key="field_error.id">{{ field_error[0] }}</p>
-    {{ error_response }}
+  <v-alert rounded outlined type="error" v-if="error_response" >
+<!--    <p v-for="field_error in error_response" v-bind:key="field_error.id">{{ field_error[0] }}</p>-->
+    Girdiğiniz bilgilerde hatalar var! Lütfen aşağıdaki hataları düzeltip tekrar deneyin.
   </v-alert>
   <v-text-field ref="requester_email_address"
                 v-model="requester_email_address.value"

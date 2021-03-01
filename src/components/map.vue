@@ -1,19 +1,5 @@
 <template>
   <div>
-    <v-btn
-      color="primary"
-      @click="show_districts = !show_districts"
-      class="m-2"
-    >
-      Districts
-    </v-btn>
-    <v-btn
-      color="primary"
-      @click="show_provinces = !show_provinces"
-      class="m-2"
-    >
-      Provinces
-    </v-btn>
     <l-map
       style="height: 70vh; width: 100%; z-index:0"
       :zoom="zoom"
@@ -31,9 +17,9 @@
           :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"
           color="red"
           fill-color="red"
-          fill-opacity=1
-          radius=3
-          weight=2
+          :fill-opacity=dot.fill_opacity
+          :radius=dot.radius
+          :weight=dot.weight
           v-model="active_organization"
           v-on:mouseenter="focusOrganizationInList(organization.id)"
         >
@@ -49,56 +35,22 @@
           </v-card-text>
         </v-card>
       </l-control>
-
-<!--      <l-choropleth-layer-->
-<!--        :data=provinces_data-->
-<!--        titleKey="name_1"-->
-<!--        idKey="id"-->
-<!--        :value=choropleth_value-->
-<!--        geojsonIdKey="id"-->
-<!--        :geojson=provinces-->
-<!--        :colorScale=colorScale>-->
-<!--      </l-choropleth-layer>-->
-<!--      <l-geo-json-->
-<!--        :geojson="districts"-->
-<!--        :options-style="styleFunction"-->
-<!--        v-if="show_districts"-->
-<!--      />-->
-      <div
-        v-if="show_provinces">
-        <l-geo-json
-        v-for="province in provinces.features" :key=province.id
-        :geojson="province"
-        :options-style="styleFunction"
-        ref="provinces"
-      />
-
-      </div>
-
-<!--      <l-geo-json-->
-<!--        :geojson="provinces"-->
-<!--        :options-style="styleFunction"-->
-<!--        v-if="show_provinces"-->
-<!--      />-->
     </l-map>
   </div>
-
-
 </template>
 
 <script>
-import {LMap, LTileLayer, LGeoJson, LCircleMarker, LControl} from 'vue2-leaflet';
+import {LMap, LTileLayer, LCircleMarker, LControl} from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 // import {ChoroplethLayer } from 'vue-choropleth'
 
 // import axios from 'axios';
-import ProvinceDataService from "../services/provinceDataService";
-import DistrictDataService from "../services/districtDataService";
+// import ProvinceDataService from "../services/provinceDataService";
+// import DistrictDataService from "../services/districtDataService";
 export default {
   components: {
     LMap,
     LTileLayer,
-    LGeoJson,
     LCircleMarker,
     LControl,
     'v-marker-cluster': Vue2LeafletMarkerCluster
@@ -120,7 +72,12 @@ export default {
       colorScale:["e7d090","de7062"],
       choropleth_value: {value: "total_organizations", key: "org amount"},
       active_organization: null,
-      active_organization_obj: null
+      active_organization_obj: null,
+      dot: {
+        radius: 3,
+        weight: 2,
+        fill_opacity: 1,
+      },
 
     };
   },
@@ -133,17 +90,17 @@ export default {
     }
   },
   mounted () {
-    DistrictDataService.getAll()
-      .then(response => {
-        this.districts = response.data;
-      });
-
-    ProvinceDataService.getAll()
-      .then(response => {
-        this.provinces = response.data;
-        this.createProvincesData();
-
-      });
+    // DistrictDataService.getAll()
+    //   .then(response => {
+    //     this.districts = response.data;
+    //   });
+    //
+    // ProvinceDataService.getAll()
+    //   .then(response => {
+    //     this.provinces = response.data;
+    //     this.createProvincesData();
+    //
+    //   });
   },
   async created() {
 
@@ -158,22 +115,22 @@ export default {
     boundsUpdated (bounds) {
       this.bounds = bounds;
     },
-    showProvince(province_id) {
-      console.log(province_id);
-      let selected_province;
-      selected_province = this.$refs["provinces"].filter(province => province.geojson.id === province_id)[0];
-      console.log(selected_province);
-      selected_province.$props.visible = !selected_province.$props.visible;
-      this.$refs["organizations_map"].fitBounds(selected_province.getBounds());
-    },
-    createProvincesData() {
-      this.provinces.features.forEach(item => {
-        let province_data = item.properties;
-
-        province_data["id"] = item.id;
-        this.provinces_data.push(province_data)
-      })
-    },
+    // showProvince(province_id) {
+    //   console.log(province_id);
+    //   let selected_province;
+    //   selected_province = this.$refs["provinces"].filter(province => province.geojson.id === province_id)[0];
+    //   console.log(selected_province);
+    //   selected_province.$props.visible = !selected_province.$props.visible;
+    //   this.$refs["organizations_map"].fitBounds(selected_province.getBounds());
+    // },
+    // createProvincesData() {
+    //   this.provinces.features.forEach(item => {
+    //     let province_data = item.properties;
+    //
+    //     province_data["id"] = item.id;
+    //     this.provinces_data.push(province_data)
+    //   })
+    // },
     getActiveOrganization(active_organization) {
       let hovered_organization = this.organizations.find(organization => organization.id === active_organization)
       this.active_organization_obj = hovered_organization

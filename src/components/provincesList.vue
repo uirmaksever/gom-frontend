@@ -8,9 +8,7 @@
       item-text="properties.name_1"
       item-value="id"
       attach
-      chips
-      label="Örgütler"
-      multiple>
+      label="Örgütler">
       </v-select>
       <v-select
       v-model="thematic_field_select"

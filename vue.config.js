@@ -27,7 +27,6 @@ module.exports = {
             .hotOnly(true)
             .watchOptions({poll: 1000})
             .https(false)
-            .headers({"Access-Control-Allow-Origin": ["\*"]})
             },
 // This can't stay as 127, it just works for local dev
     // publicPath: 'http://127.0.0.1:8080'

@@ -12,9 +12,9 @@
       <router-link to="/filter" class="nav-link text-dark">Filtre</router-link>
 
       <v-spacer></v-spacer>
-      <v-btn href="/new">
-        Örgütünü Ekle!
-      </v-btn>
+<!--      <v-btn href="/new">-->
+<!--        Örgütünü Ekle!-->
+<!--      </v-btn>-->
       <v-btn
         href="https://www.go-for.org/"
         target="_blank"

@@ -33,7 +33,7 @@
             <v-chip-group>
               <v-chip v-bind:key="thematic_field.id"
                       v-for="thematic_field in organization.related_thematic_fields"
-                      :to="'thematic_fields/' + thematic_field.id">
+                      :to="'/thematic_fields/' + thematic_field.id">
                 {{ thematic_field.thematic_field_name }}
               </v-chip>
             </v-chip-group>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <l-map
-      style="height: 70vh; width: 100%; z-index:0"
+      style="height: 80vh; width: 100%; z-index: 0"
       :zoom="zoom"
       :center="center"
       @update:zoom="zoomUpdated"
@@ -15,7 +15,7 @@
           v-for="organization in organizations"
           :key="organization.id"
           :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"
-          color="red"
+          color="primary"
           fill-color="red"
           :fill-opacity=dot.fill_opacity
           :radius=dot.radius
@@ -36,6 +36,7 @@
         </v-card>
       </l-control>
     </l-map>
+
   </div>
 </template>
 

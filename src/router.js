@@ -30,6 +30,16 @@ export default new Router({
             path: "/new",
             name: "organization-create",
             component: () => import("./components/createOrganization")
+        },
+        {
+            path: "/thematic_fields",
+            name: "thematic-field-list",
+            component: () => import("./components/ThematicFieldList")
+        },
+        {
+            path: "/thematic_fields/:id",
+            name: "thematic-field-detail",
+            component: () => import("./components/ThematicFieldDetail")
         }
     ]
 })

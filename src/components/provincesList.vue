@@ -1,14 +1,13 @@
 <template>
   <v-row>
-    <v-col cols="3">
+    <v-col cols="12" md="4">
       <v-select
       v-model="province_select"
-      @click="setActiveProvince(province_select)"
       :items="provinces.features"
       item-text="properties.name_1"
       item-value="id"
       attach
-      label="Örgütler">
+      label="İl">
       </v-select>
       <v-select
       v-model="thematic_field_select"
@@ -49,7 +48,7 @@
 <!--      </v-list>-->
 
     </v-col>
-    <v-col cols="9">
+    <v-col cols="12" md="8">
       <OrganizationsList v-bind:organizations="this.organizations"></OrganizationsList>
     </v-col>
   </v-row>

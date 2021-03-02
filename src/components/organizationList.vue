@@ -1,52 +1,62 @@
 <template>
   <div>
+
     <v-card flat class="border">
-    <v-list two-line
-          max-height="80vh"
-          class="overflow-y-auto p-1"
-    >
-    <v-container class="d-flex flex-nowrap justify-space-between border-bottom w-100"
-      v-for="organization in organizations" :key="organization.id"
-    >
-      <div>
-        <v-list-item
-            two-line>
-          <v-list-item-content>
-            <v-list-item-subtitle>
-              {{ organization.type_of_organization }}
-            </v-list-item-subtitle>
-            <v-list-item-title class="headline text-wrap">
-              {{ organization.organization_name }}
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ organization.registered_province }} -
-              {{ organization.registered_district }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-        <v-chip-group>
-          <v-chip v-bind:key="thematic_field.id" v-for="thematic_field in organization.related_thematic_fields">
-            {{ thematic_field.thematic_field_name }}
-          </v-chip>
-        </v-chip-group>
+      <v-list two-line
+            max-height="90vh"
+            class="overflow-y-auto p-1"
+      >
+      <v-container class="d-flex flex-nowrap justify-space-between border-bottom w-100"
+        v-for="organization in organizations" :key="organization.id"
+      >
+        <v-card width="100%" outlined>
+          <v-list-item
+              three-line>
+            <v-list-item-content>
+              <div class="overline mb-2">
+                {{ organization.type_of_organization }}
+              </div>
+              <v-list-item-title class="headline">
+                {{ organization.organization_name }}
+              </v-list-item-title>
+              <v-list-item-subtitle>
+                {{ organization.registered_province }} -
+                {{ organization.registered_district }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+            <v-list-item-avatar size="80">
+              <v-img :src="organization.logo"></v-img>
+            </v-list-item-avatar>
+          </v-list-item>
 
-        <v-card-actions>
-          <v-btn text color="primary" :to="'organizations/' + organization.id">
-            Gör
-          </v-btn>
-        </v-card-actions>
-        </div>
+          <v-card-text>
+            <v-chip-group>
+              <v-chip v-bind:key="thematic_field.id"
+                      v-for="thematic_field in organization.related_thematic_fields"
+                      :to="'thematic_fields/' + thematic_field.id">
+                {{ thematic_field.thematic_field_name }}
+              </v-chip>
+            </v-chip-group>
+          </v-card-text>
 
-        <v-avatar
-          class="ma-3"
-          size="75"
-          circle
-        >
-          <v-img :src="organization.logo"></v-img>
-        </v-avatar>
-    </v-container>
-    </v-list>
-  </v-card>
+
+          <v-card-actions>
+            <v-btn text color="primary" :to="'/organizations/' + organization.id">
+              Gör
+            </v-btn>
+          </v-card-actions>
+  <!--        <v-avatar-->
+  <!--          class="ma-3"-->
+  <!--          size="75"-->
+  <!--          circle-->
+  <!--        >-->
+  <!--        </v-avatar>-->
+        </v-card>
+
+
+      </v-container>
+      </v-list>
+    </v-card>
     <v-skeleton-loader
     v-show="loading"
     type="article, actions"

@@ -1,51 +1,87 @@
 <template>
   <v-app>
-    <v-app-bar
-      color="white"
-      app
-      flat
-      class="mb-0"
-    >
-      <div class="d-flex align-center">
-        <router-link to="/" class="navbar-brand text-dark">Gençlik Örgütleri Haritası</router-link>
-      </div>
-      <router-link to="/filter" class="nav-link text-dark">Filtre</router-link>
+    <v-container fluid>
+      <v-navigation-drawer
+          app
+          permanent
+          expand-on-hover
+          v-model="drawer"
+          light
+          mini-variant
+          class="accent-4">
+        <v-layout column fill-height>
+          <v-list dense>
 
-      <v-spacer></v-spacer>
-<!--      <v-btn href="/new">-->
-<!--        Örgütünü Ekle!-->
-<!--      </v-btn>-->
-      <v-btn
-        href="https://www.go-for.org/"
-        target="_blank"
-        text
-        rounded
-        class="m-2"
-      >
-        <img height="40" src="/logos/gofor-logo.png">
-<!--        <span class="mr-2">Gençlik Örgütleri Forumu</span>-->
-<!--        <v-icon>mdi-open-in-new</v-icon>-->
-      </v-btn>
+          <v-list-item class="px-2 primary-accent-4" to="/" >
+  <!--          <router-link to="/">-->
+              <v-list-item-avatar>
+                <v-icon>mdi-map</v-icon>
+              </v-list-item-avatar>
+              <v-list-item-title>
+                Gençlik Örgütleri Haritası
 
-    </v-app-bar>
-    <v-divider></v-divider>
-    <v-main fluid>
-      <router-view/>
-    </v-main>
+              </v-list-item-title>
+  <!--          </router-link>-->
+          </v-list-item>
+
+          <v-divider></v-divider>
+
+          <v-list-item to="/filter" link>
+            <v-list-item-icon>
+              <v-icon>mdi-filter</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+<!--              <router-link to="/filter">Filtre</router-link>-->
+              Filtre
+            </v-list-item-content>
+
+          </v-list-item>
+          <v-list-item to="/thematic_fields" link>
+            <v-list-item-icon>
+              <v-icon>mdi-graph</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              Tematik Alanlar
+            </v-list-item-content>
+          </v-list-item>
+          </v-list>
+
+          <v-spacer></v-spacer>
+          <v-list>
+            <v-list-item href="https://www.go-for.org/" target="_blank">
+              <v-list-item-icon>
+                <v-img contain width="40" src="/logos/gofor-logo-short.png"></v-img>
+              </v-list-item-icon>
+              <v-list-item-content>Gençlik Örgütleri Forumu</v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+        </v-layout>
+      </v-navigation-drawer>
+<!--      <HeaderTop></HeaderTop>-->
+<!--      <v-divider></v-divider>-->
+      <v-main>
+        <router-view/>
+      </v-main>
+    </v-container>
   </v-app>
+
 </template>
 
 <script>
-
+// import HeaderTop from "@/components/HeaderTop"
 export default {
   name: 'App',
 
   components: {
-
+    // HeaderTop,
   },
 
-  data: () => ({
-    //
-  }),
+  data () {
+    return {
+      drawer: null,
+      mini: true,
+    }
+  },
 };
 </script>

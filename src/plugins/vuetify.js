@@ -11,6 +11,9 @@ export default new Vuetify({
       locales: {tr,},
       current: "tr",
     },
+    breakpoint: {
+      mobileBreakpoint: "sm",
+    },
     theme: {
         themes: {
             light: {

@@ -12,6 +12,11 @@ export default new Router({
             component: () => import("./components/mainPage")
         },
         {
+            path: "/about",
+            name: "about-page",
+            component: () => import("./components/AboutPage")
+        },
+        {
             path: "/filter",
             name: "filter",
             component: () => import("./components/provincesList")
@@ -40,6 +45,16 @@ export default new Router({
             path: "/thematic_fields/:id",
             name: "thematic-field-detail",
             component: () => import("./components/ThematicFieldDetail")
+        },
+        {
+            path: "/facilities",
+            name: "facility-list",
+            component: () => import("./components/FacilityList")
+        },
+        {
+            path: "/facilities/:id",
+            name: "facility-detail",
+            component: () => import("./components/FacilityDetail")
         }
     ]
 })

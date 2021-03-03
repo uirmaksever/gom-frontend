@@ -7,7 +7,7 @@
       <v-divider></v-divider>
       <v-col cols="12" md="4">
         <h2 class="display-1 pl-3 px-3">Örgütler</h2>
-        <OrganizationsList v-bind:organizations="this.organizations"></OrganizationsList>
+        <OrganizationsList v-bind:organizations="this.organizations" v-bind:loading="organizations_loading"></OrganizationsList>
       </v-col>
     </v-row>
   </v-container>
@@ -26,13 +26,17 @@ export default {
   data() {
     return {
       organizations: [],
+      organizations_loading: true,
 
     }
   },
   mounted() {
     OrganizationDataService.getAll()
       .then(
-          response => {this.organizations = response.data;},
+          response => {
+            this.organizations = response.data;
+            this.organizations_loading = false;
+            },
       )
   }
 

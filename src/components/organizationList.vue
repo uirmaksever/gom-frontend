@@ -72,10 +72,16 @@ export default {
   name: "OrganizationList",
   data () {
     return {
-      loading: true,
+
     }
   },
   props: {
+    loading: {
+      type: Boolean,
+      default() {
+        return this.loading;
+      }
+    },
     organizations: {
       type: Array,
       default () {
@@ -92,7 +98,7 @@ export default {
   updated() {
     this.$nextTick(function () {
       console.log("Loaded now")
-      this.loading = false
+      // this.loading = false
     })
   },
   methods: {

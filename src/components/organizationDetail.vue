@@ -38,20 +38,22 @@
             <v-col>
               <v-card flat>
               <v-chip
+                class="my-2"
                 color="#EEE8AA"
                 text-color="8B4513"
                 v-if="organization.gofor_membership_status === true">
               <v-icon>mdi-star</v-icon>
               Go-for Üyesi
-            </v-chip>
-              <div>
+              </v-chip>
+
+              <div class="my-2">
               <template
                 v-if="organization.comms_permissions.web_site === true && organization.web_site !== null">
                 <v-btn icon color="darkblue" class="p-4"
                   :href="organization.web_site">
                   <v-icon large>mdi-web</v-icon>
                 </v-btn>
-            </template>
+              </template>
               <template v-if="organization.comms_permissions.social_media === true">
               <template
                   v-if="organization.facebook !== null">
@@ -105,6 +107,19 @@
               <span v-else>Hayır</span>
             </p>
             <template v-if="organization.comms_permissions.related_facilities === true">
+              <div>
+                <v-alert
+                  border="left"
+                  color="green"
+                  dense
+                  outlined
+                  text
+                  type="success"
+                >
+                  Bu örgütün sahip olduğu kaynaklara erişmek için iletişim talebi gönderebilirsiniz!
+                  Bunun için aşağıdaki kaynaklardan birine tıklamanız yeterli.
+                </v-alert>
+              </div>
               <v-chip-group column>
                 <v-chip v-for="facility in organization.related_facilities"
                         :key="facility.id"

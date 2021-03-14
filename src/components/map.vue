@@ -15,33 +15,37 @@
           v-for="organization in organizations"
           :key="organization.id"
           :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"
-          color="primary"
-          fill-color="red"
+          color="#4caf50"
+          fill-color="#ff9800"
           :fill-opacity=dot.fill_opacity
           :radius=dot.radius
           :weight=dot.weight
+          :stroke=true
           v-model="active_organization"
-          v-on:mouseenter="focusOrganizationInList(organization.id)"
+          v-on:click="focusOrganizationInList(organization.id)"
         >
+          <l-popup>
+            <a v-bind:href="'organizations/' + organization.id">{{ organization.organization_name }}</a>
+          </l-popup>
         </l-circle-marker>
       </v-marker-cluster>
-      <l-control position="bottomleft" v-if="active_organization">
-        <v-card>
-          <v-card-text>
-            <a v-bind:href="'organizations/' + active_organization_obj.id">{{ active_organization_obj.organization_name }}</a>
-            <br/>
-            {{ active_organization_obj.registered_province }} -
-            {{ active_organization_obj.registered_district }}
-          </v-card-text>
-        </v-card>
-      </l-control>
+<!--      <l-control position="bottomleft" v-if="active_organization">-->
+<!--        <v-card>-->
+<!--          <v-card-text>-->
+<!--            <a v-bind:href="'organizations/' + active_organization_obj.id">{{ active_organization_obj.organization_name }}</a>-->
+<!--            <br/>-->
+<!--            {{ active_organization_obj.registered_province }} - -->
+<!--            {{ active_organization_obj.registered_district }}-->
+<!--          </v-card-text>-->
+<!--        </v-card>-->
+<!--      </l-control>-->
     </l-map>
 
   </div>
 </template>
 
 <script>
-import {LMap, LTileLayer, LCircleMarker, LControl} from 'vue2-leaflet';
+import {LMap, LTileLayer, LCircleMarker, LPopup} from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 // import {ChoroplethLayer } from 'vue-choropleth'
 
@@ -53,7 +57,7 @@ export default {
     LMap,
     LTileLayer,
     LCircleMarker,
-    LControl,
+    LPopup,
     'v-marker-cluster': Vue2LeafletMarkerCluster
     // 'l-choropleth-layer': ChoroplethLayer
   },
@@ -73,10 +77,9 @@ export default {
       colorScale:["e7d090","de7062"],
       choropleth_value: {value: "total_organizations", key: "org amount"},
       active_organization: null,
-      active_organization_obj: null,
       dot: {
-        radius: 3,
-        weight: 2,
+        radius: 5,
+        weight: 3,
         fill_opacity: 1,
       },
 
@@ -87,6 +90,12 @@ export default {
       type: Array,
       default () {
         return this.organizations
+      },
+    },
+    active_organization_obj: {
+      type: Object,
+      default() {
+        return this.active_organization_obj;
       }
     }
   },
@@ -137,11 +146,10 @@ export default {
       this.active_organization_obj = hovered_organization
     },
     focusOrganizationInList(active_organization) {
-      console.log(active_organization);
       let hovered_organization = this.organizations.find(organization => organization.id === active_organization)
       this.active_organization_obj = hovered_organization
       this.active_organization = active_organization
-      console.log(hovered_organization)
+      this.$emit("org-pin-clicked", this.active_organization_obj)
     }
   },
   computed: {
@@ -161,7 +169,6 @@ export default {
   },
   watch: {
     active_organization: function () {
-      console.log(this.active_organization);
       this.focusOrganizationInList(this.active_organization);
     }
   }
@@ -173,11 +180,11 @@ export default {
 @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 .marker-cluster-small {
-  background-color: #ff6400 !important;
+  background-color: #4caf50 !important;
 }
 
 .marker-cluster-small div {
-  background-color: #ff0000 !important;
+  background-color: #ff9800 !important;
   color: white !important;
   font-weight: 700;
 }

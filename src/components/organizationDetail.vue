@@ -101,11 +101,11 @@
           <v-row>
             <v-col>
               <div>
-            <h4>Ekipmanlar</h4>
-            <p>Organizasyonun ofisi var mı?
-              <span v-if="organization.organization_have_office === true">Evet</span>
-              <span v-else>Hayır</span>
-            </p>
+            <h2 class="px-2">Kaynaklar</h2>
+<!--            <p>Organizasyonun ofisi var mı?-->
+<!--              <span v-if="organization.organization_have_office === true">Evet</span>-->
+<!--              <span v-else>Hayır</span>-->
+<!--            </p>-->
             <template v-if="organization.comms_permissions.related_facilities === true">
               <div>
                 <v-alert
@@ -134,7 +134,7 @@
               <div>
                 <v-alert
                   border="left"
-                  color="red"
+                  color="secondary"
                   dense
                   outlined
                   text
@@ -146,7 +146,7 @@
             </template>
           </div>
               <div>
-            <h4>Tematik Alanlar</h4>
+            <h2 class="px-2">Tematik Alanlar</h2>
             <v-chip-group>
               <v-chip v-for="thematic_field in organization.related_thematic_fields" :key="thematic_field.id">
                 {{ thematic_field.thematic_field_name }}
@@ -179,9 +179,9 @@
             :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"
             color="red"
             fill-color="red"
-            fill-opacity=1
-            radius=3
-            weight=2
+            :fill-opacity="circle.fill_opacity"
+            :radius="circle.radius"
+            :weight="circle.weight"
           >
             <l-popup>{{ organization.organization_name }}</l-popup>
           </l-circle-marker>
@@ -222,7 +222,7 @@
                 </template>
                 <template v-else>
                   <v-list-item-icon>
-                    <v-icon color="red">mdi-account</v-icon>
+                    <v-icon color="secondary">mdi-account</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     İletişim kişisi bilgisi paylaşılmamış.
@@ -241,7 +241,7 @@
                 </template>
                 <template v-else>
                   <v-list-item-icon>
-                    <v-icon color="red">mdi-mail</v-icon>
+                    <v-icon color="secondary">mdi-mail</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     E-posta adresi paylaşılmamış.
@@ -259,7 +259,7 @@
                 </template>
                 <template v-else>
                   <v-list-item-icon>
-                    <v-icon color="red">mdi-phone</v-icon>
+                    <v-icon color="secondary">mdi-phone</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     Telefon numarası paylaşılmamış.
@@ -281,7 +281,7 @@
               </template>
               <template v-else>
               <v-list-item-icon>
-                <v-icon color="red">mdi-map-marker</v-icon>
+                <v-icon color="secondary">mdi-map-marker</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 Adres paylaşılmamış
@@ -347,6 +347,11 @@ export default {
       map: null,
       use_request_form: false,
       selected_facility: null,
+      circle: {
+        fill_opacity: 1,
+        radius: 3,
+        weight: 2
+      }
     }
   },
   methods: {

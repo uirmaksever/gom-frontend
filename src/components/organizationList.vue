@@ -5,11 +5,12 @@
       <v-list two-line
             max-height="90vh"
             class="overflow-y-auto p-1"
+            v-if="organizations.length > 0"
       >
       <v-container class="d-flex flex-nowrap justify-space-between border-bottom w-100"
         v-for="organization in organizations" :key="organization.id"
       >
-        <v-card width="100%" outlined>
+        <v-card width="100%" outlined active-class="bg-primary" v-on:click="focusOrganization(organization.id)">
           <v-list-item
               three-line>
             <v-list-item-content>
@@ -37,6 +38,13 @@
                 {{ thematic_field.thematic_field_name }}
               </v-chip>
             </v-chip-group>
+
+            <v-chip-group v-if="organization.comms_permissions.related_facilities">
+              <v-chip v-for="facility in organization.related_facilities"
+                      v-bind:key="facility.id"
+                      :to="'/facilities/' + facility.id"
+              >{{ facility.facility_name }}</v-chip>
+            </v-chip-group>
           </v-card-text>
 
 
@@ -56,6 +64,9 @@
 
       </v-container>
       </v-list>
+      <div class="text-center">
+        Aradığınız kriterlerde örgüt bulunamadı. Filtreleri sıfırlamayı deneyebilirsiniz.
+      </div>
     </v-card>
     <v-skeleton-loader
     v-show="loading"
@@ -87,6 +98,12 @@ export default {
       default () {
         return this.organizations
       }
+    },
+    active_organization_obj: {
+      type: Object,
+      default() {
+        return this.active_organization_obj;
+      }
     }
   },
   mounted() {
@@ -102,7 +119,10 @@ export default {
     })
   },
   methods: {
-
+    focusOrganization (active_organization_id) {
+      let active_organization = this.active_organization_obj = this.organizations.find(organization => organization.id === active_organization_id)
+      this.$emit("org-item-focused", active_organization)
+    }
   }
 }
 </script>

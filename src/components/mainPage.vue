@@ -91,12 +91,19 @@
           </v-select>
         </div>
           <v-banner single-line>
-            <h2>Seçilen Örgüt</h2>
+            <h2 class="py-2">Seçilen Örgüt</h2>
           </v-banner>
           <OrganizationSingleCard :organization="active_organization"></OrganizationSingleCard>
       </v-col>
     </v-row>
+    <v-overlay :value="organizations_loading">
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </v-container>
+
 </template>
 
 <script>

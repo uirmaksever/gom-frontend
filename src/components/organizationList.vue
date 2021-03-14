@@ -64,7 +64,7 @@
 
       </v-container>
       </v-list>
-      <div class="text-center">
+      <div v-else class="text-center">
         Aradığınız kriterlerde örgüt bulunamadı. Filtreleri sıfırlamayı deneyebilirsiniz.
       </div>
     </v-card>

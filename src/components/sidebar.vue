@@ -24,16 +24,16 @@
 
           <v-divider></v-divider>
 
-          <v-list-item to="/filter" link>
-            <v-list-item-icon>
-              <v-icon>mdi-filter</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-<!--              <router-link to="/filter">Filtre</router-link>-->
-              Filtre
-            </v-list-item-content>
+<!--          <v-list-item to="/filter" link>-->
+<!--            <v-list-item-icon>-->
+<!--              <v-icon>mdi-filter</v-icon>-->
+<!--            </v-list-item-icon>-->
+<!--            <v-list-item-content>-->
+<!--&lt;!&ndash;              <router-link to="/filter">Filtre</router-link>&ndash;&gt;-->
+<!--              Filtre-->
+<!--            </v-list-item-content>-->
 
-          </v-list-item>
+<!--          </v-list-item>-->
           <v-list-item to="/thematic_fields" link>
             <v-list-item-icon>
               <v-icon>mdi-vector-polyline</v-icon>

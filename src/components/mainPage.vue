@@ -1,33 +1,6 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12" md="8">
-        <v-tabs
-          v-model="tab"
-        >
-          <v-tabs-slider color="green"></v-tabs-slider>
-          <v-tab :key="org_map">HARİTA</v-tab>
-
-          <v-tab :key="org_list">LİSTE</v-tab>
-
-        </v-tabs>
-        <v-tabs-items v-model="tab">
-          <v-tab-item :key="org_map">
-            <Map v-bind:organizations="get_organizations"
-                 @org-pin-clicked="change_active_organization"
-            ></Map>
-          </v-tab-item>
-          <v-tab-item :key="org_list">
-            <OrganizationsList v-bind:organizations="get_organizations"
-                               v-bind:loading="organizations_loading"
-                               v-bind:active_organization_obj="active_organization"
-                               @org-item-focused="change_active_organization"
-            ></OrganizationsList>
-
-          </v-tab-item>
-        </v-tabs-items>
-      </v-col>
-      <v-divider></v-divider>
       <v-col cols="12" md="4">
         <div>
           <v-banner single-line class="d-flex flex-row">
@@ -95,6 +68,34 @@
           </v-banner>
           <OrganizationSingleCard :organization="active_organization"></OrganizationSingleCard>
       </v-col>
+
+      <v-col cols="12" md="8">
+        <v-tabs
+          v-model="tab"
+        >
+          <v-tabs-slider color="green"></v-tabs-slider>
+          <v-tab :key="org_map">HARİTA</v-tab>
+
+          <v-tab :key="org_list">LİSTE</v-tab>
+
+        </v-tabs>
+        <v-tabs-items v-model="tab">
+          <v-tab-item :key="org_map">
+            <Map v-bind:organizations="get_organizations"
+                 @org-pin-clicked="change_active_organization"
+            ></Map>
+          </v-tab-item>
+          <v-tab-item :key="org_list">
+            <OrganizationsList v-bind:organizations="get_organizations"
+                               v-bind:loading="organizations_loading"
+                               v-bind:active_organization_obj="active_organization"
+                               @org-item-focused="change_active_organization"
+            ></OrganizationsList>
+
+          </v-tab-item>
+        </v-tabs-items>
+      </v-col>
+
     </v-row>
     <v-overlay :value="organizations_loading">
       <v-progress-circular

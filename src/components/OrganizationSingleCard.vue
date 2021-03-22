@@ -1,5 +1,5 @@
 <template>
-          <v-card v-if="organization">
+          <v-card flat v-if="organization">
             <v-card-title>{{ organization.organization_name }}</v-card-title>
             <v-card-subtitle>
               <v-icon>mdi-domain</v-icon>
@@ -63,11 +63,11 @@
               <v-btn :to="'/organizations/' + organization.id" outlined color="primary">GÖRÜNTÜLE</v-btn>
             </v-card-actions>
           </v-card>
-          <v-card v-else>
+          <p v-else>
             <v-card-text>
               Lütfen listeden ya da haritadan bir örgüt seçin.
             </v-card-text>
-          </v-card>
+          </p>
 </template>
 
 <script>

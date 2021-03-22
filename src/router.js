@@ -17,8 +17,8 @@ export default new Router({
             component: () => import("./components/AboutPage")
         },
         {
-            path: "/filter",
-            name: "filter",
+            path: "/provinces",
+            name: "province-list",
             component: () => import("./components/provincesList")
         },
         {

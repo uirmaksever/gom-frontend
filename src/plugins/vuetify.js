@@ -18,11 +18,11 @@ export default new Vuetify({
         themes: {
             light: {
               // Custom colors
-              primary: "#4caf50",
-              secondary: "#ff9800",
+              primary: "#01AF9C",
+              secondary: "#FF5013",
               accent: "#2196f3",
               error: "#f44336",
-              warning: "#ffeb3b",
+              warning: "#e5a30c",
               info: "#00bcd4",
               success: "#cddc39"
             }

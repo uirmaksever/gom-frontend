@@ -15,8 +15,8 @@
           v-for="organization in organizations"
           :key="organization.id"
           :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"
-          color="#4caf50"
-          fill-color="#ff9800"
+          :color=fillColor
+          :fill-color=borderColor
           :fill-opacity=dot.fill_opacity
           :radius=dot.radius
           :weight=dot.weight
@@ -72,14 +72,13 @@ export default {
       provinces_data: [],
       show_districts: false,
       show_provinces: false,
-      fillColor: "#912525",
-      borderColor: "#3ea943",
-      colorScale:["e7d090","de7062"],
+      fillColor: "white",
+      borderColor: "#FF5013",
       choropleth_value: {value: "total_organizations", key: "org amount"},
       active_organization: null,
       dot: {
-        radius: 5,
-        weight: 3,
+        radius: 7,
+        weight: 2,
         fill_opacity: 1,
       },
 
@@ -153,19 +152,7 @@ export default {
     }
   },
   computed: {
-    styleFunction () {
-      const fillColor = this.fillColor; // important! need touch fillColor in computed for re-calculate when change fillColor
-      return () => {
-        return {
-          weight: 2,
-          color: "#9426d9",
-          opacity: 1,
-          fillColor: fillColor,
-          fillOpacity: Math.random(),
-          borderColor: "#ba2727"
-        };
-      };
-    },
+
   },
   watch: {
     active_organization: function () {
@@ -180,11 +167,12 @@ export default {
 @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 .marker-cluster-small {
-  background-color: #4caf50 !important;
+  background-color: white !important;
 }
 
 .marker-cluster-small div {
-  background-color: #ff9800 !important;
+  /*background-color: #FF5013 !important;*/
+  background-color: #FF5013 !important;
   color: white !important;
   font-weight: 700;
 }

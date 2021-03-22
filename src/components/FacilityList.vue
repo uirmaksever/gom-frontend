@@ -1,7 +1,10 @@
 <template>
   <v-container>
     <v-col cols="12">
-      <h1 class="text-center">Paylaşılabilecek Kaynaklar</h1>
+      <div class="mt-5">
+        <h1 class="text-center primary--text">Paylaşılabilecek Kaynaklar</h1>
+      </div>
+      <v-divider class="my-5"></v-divider>
       <v-card tile>
         <v-list-item :key="facility.id" v-for="facility in facilities" :to="'facilities/' + facility.id">
           <v-list-item-content>

@@ -1,20 +1,21 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12" md="4">
-        <div>
+      <v-col cols="12" md="4" max-height="90vh" class="overflow-y-auto p-1">
+
+        <v-card elevation="5" rounded-lg class="mb-5">
           <v-banner single-line class="d-flex flex-row">
             <div class="d-flex flex-row">
-              <div>
-                <h2>Fitrele</h2>
+              <div class="mt-2">
+                <h2 class="primary--text">Fitrele</h2>
                 <h1 class="overline">{{ get_organizations.length }} Örgüt</h1>
               </div>
               <v-spacer></v-spacer>
-              <div>
+              <div class="align-center">
                 <v-btn @click="reset_filters"
                        small
                        outlined
-                       rounded
+                       rounded-lg
                        color="primary">
                   <v-icon>
                      mdi-backup-restore
@@ -36,7 +37,8 @@
             item-value="id"
             attach
             clearable
-            label="İller">
+            label="İller"
+            class="px-5">
           </v-select>
 
           <v-select
@@ -48,6 +50,7 @@
             multiple
             chips
             clearable
+            class="px-5"
             >
           </v-select>
 
@@ -60,26 +63,31 @@
             multiple
             chips
             clearable
+            class="px-5"
             >
           </v-select>
-        </div>
+        </v-card>
+        <v-card rounded-lg elevation="5">
           <v-banner single-line>
-            <h2 class="py-2">Seçilen Örgüt</h2>
+            <h2 class="py-2 primary--text">Seçilen Örgüt</h2>
           </v-banner>
           <OrganizationSingleCard :organization="active_organization"></OrganizationSingleCard>
+        </v-card>
+
       </v-col>
 
       <v-col cols="12" md="8">
-        <v-tabs
-          v-model="tab"
-        >
+        <v-sheet elevation="5" rounded-lg class="px-0 pt-0">
+          <v-tabs
+          v-model="tab">
           <v-tabs-slider color="green"></v-tabs-slider>
           <v-tab :key="org_map">HARİTA</v-tab>
 
           <v-tab :key="org_list">LİSTE</v-tab>
 
         </v-tabs>
-        <v-tabs-items v-model="tab">
+          <v-divider></v-divider>
+          <v-tabs-items v-model="tab">
           <v-tab-item :key="org_map">
             <Map v-bind:organizations="get_organizations"
                  @org-pin-clicked="change_active_organization"
@@ -94,6 +102,8 @@
 
           </v-tab-item>
         </v-tabs-items>
+        </v-sheet>
+
       </v-col>
 
     </v-row>

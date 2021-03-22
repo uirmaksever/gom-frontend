@@ -134,7 +134,7 @@
               <div>
                 <v-alert
                   border="left"
-                  color="secondary"
+                  color="warning"
                   dense
                   outlined
                   text
@@ -177,8 +177,8 @@
           <l-tile-layer :url="url"></l-tile-layer>
           <l-circle-marker
             :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"
-            color="red"
-            fill-color="red"
+            :color="circle.fillColor"
+            :fill-color="circle.borderColor"
             :fill-opacity="circle.fill_opacity"
             :radius="circle.radius"
             :weight="circle.weight"
@@ -349,8 +349,10 @@ export default {
       selected_facility: null,
       circle: {
         fill_opacity: 1,
-        radius: 3,
-        weight: 2
+        radius: 7,
+        weight: 2,
+        borderColor: "#FF5013",
+        fillColor: "white"
       }
     }
   },

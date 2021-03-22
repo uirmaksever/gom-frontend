@@ -64,7 +64,7 @@
 
       </v-container>
       </v-list>
-      <div v-else class="text-center">
+      <div v-else-if="organizations.length === 0 && loading === false" class="text-center">
         Aradığınız kriterlerde örgüt bulunamadı. Filtreleri sıfırlamayı deneyebilirsiniz.
       </div>
     </v-card>

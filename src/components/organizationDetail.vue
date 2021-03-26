@@ -5,33 +5,43 @@
         <v-sheet>
           <v-row>
             <v-col>
-              <h6 class="text-subtitle-1">{{ organization.type_of_organization }}</h6>
-              <h3 class="text-lg-h3">
-                <template
-                    v-if="organization.comms_permissions.web_site === true && organization.web_site !== null">
-                  <a
-                      :href="organization.web_site"
-                      target="_blank"
-                      v-if="organization.comms_permissions.web_site === true && organization.web_site !== null">
-                    {{ organization.organization_name }}</a>
-                </template>
-                <template v-else>
-                  <v-tooltip
-                  bottom>
-                  <template v-slot:activator="{on, attrs}">
-                    <p
-                        v-bind="attrs"
-                        v-on="on"
-                        >
-                      {{ organization.organization_name }}
-                    </p>
-                  </template>
-                  <span>Web sitesi bilgisi paylaşılmadı.</span>
-                </v-tooltip>
-                </template>
+              <div class="d-flex flex-row">
+                <v-avatar tile class="align-self-center">
+                  <v-img :src="organization.logo"></v-img>
+                </v-avatar>
+                <v-divider vertical class="mx-2"></v-divider>
+                <div>
+                  <h6 class="text-subtitle-1">{{ organization.type_of_organization }}</h6>
+                  <h4 class="text-lg-h3">
+                    <template
+                        v-if="organization.comms_permissions.web_site === true && organization.web_site !== null">
+                      <a
+                          :href="organization.web_site"
+                          target="_blank"
+                          v-if="organization.comms_permissions.web_site === true && organization.web_site !== null">
+                        {{ organization.organization_name }}</a>
+                    </template>
+                    <template v-else>
+                      <v-tooltip
+                      bottom>
+                      <template v-slot:activator="{on, attrs}">
+                        <p
+                            v-bind="attrs"
+                            v-on="on"
+                            >
+                          {{ organization.organization_name }}
+                        </p>
+                      </template>
+                      <span>Web sitesi bilgisi paylaşılmadı.</span>
+                    </v-tooltip>
+                    </template>
 
 
-              </h3>
+                  </h4>
+                </div>
+              </div>
+
+
             </v-col>
           </v-row>
           <v-row>

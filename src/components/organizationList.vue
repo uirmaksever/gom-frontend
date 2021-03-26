@@ -25,9 +25,9 @@
                 {{ organization.registered_district }}
               </v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-avatar size="80">
-              <v-img :src="organization.logo"></v-img>
-            </v-list-item-avatar>
+<!--            <v-list-item-avatar size="80">-->
+<!--              <v-img :src="organization.logo"></v-img>-->
+<!--            </v-list-item-avatar>-->
           </v-list-item>
 
           <v-card-text>

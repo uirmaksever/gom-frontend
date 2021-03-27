@@ -1,8 +1,10 @@
 <template>
           <v-card flat v-if="organization">
-            <v-avatar tile class="align-self-center" v-if="organization.logo !== null">
-              <v-img :src="organization.logo"></v-img>
-            </v-avatar>
+            <v-card-text v-if="organization.logo !== null">
+              <v-img contain max-height="40"  :src="organization.logo"></v-img>
+
+            </v-card-text>
+
             <v-card-title>{{ organization.organization_name }}</v-card-title>
             <v-card-subtitle>
               <v-icon>mdi-domain</v-icon>

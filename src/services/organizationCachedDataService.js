@@ -3,7 +3,7 @@ import http from "@/http-common";
 
 class OrganizationCachedDataService {
   getAll() {
-    return http.get("/organizations/");
+    return http.get("/organizations_cached/");
   }
 }
 

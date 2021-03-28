@@ -30,7 +30,7 @@
 <!--            </v-list-item-avatar>-->
           </v-list-item>
 
-          <v-card-text>
+          <v-card-text v-if="organization.related_thematic_fields !== null">
             <v-chip-group>
               <v-chip v-bind:key="thematic_field.id"
                       v-for="thematic_field in organization.related_thematic_fields"

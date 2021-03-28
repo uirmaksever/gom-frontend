@@ -23,9 +23,19 @@
 
   </v-alert>
   <v-alert rounded outlined type="error" v-if="error_response" >
-<!--    <p v-for="field_error in error_response" v-bind:key="field_error.id">{{ field_error[0] }}</p>-->
     Girdiğiniz bilgilerde hatalar var! Lütfen aşağıdaki hataları düzeltip tekrar deneyin.
   </v-alert>
+  <v-alert rounded outlined type="error" v-if="error_status == 500" >
+    Talebinizi işlerken bir sorun oluştu. Bu utandırıcı.
+    Girdiğiniz bilgileri <a href="mailto:orgutler@go-for.org">orgutler@go-for.org</a>
+    adresine e-posta kanalıyla iletebilirseniz, ulaşması için elimizden geleni yapacağız.
+  </v-alert>
+  <v-text-field ref="requester_name_surname"
+                v-model="requester_name_surname.value"
+                label="İsim Soyisminiz"
+                :error=requester_name_surname.show_error
+                :rules="requester_name_surname.error"
+  ></v-text-field>
   <v-text-field ref="requester_email_address"
                 v-model="requester_email_address.value"
                 label="E-posta Adresiniz"
@@ -57,10 +67,10 @@
             max-width=600
   >
     <v-card>
-      <v-card-title class="justify-content-center">Talebiniz başarıyla iletildi!</v-card-title>
+      <v-card-title class="justify-center">Talebiniz başarıyla iletildi!</v-card-title>
       <v-card-text class="justify-content-center">
         <div class="text-center">
-          <v-btn icon color="success" height=80 width=80>
+          <v-btn icon color="primary" height=80 width=80>
             <v-icon size=60>mdi-check-outline</v-icon>
           </v-btn>
           <p>Talebinizi başarıyla aldık. Talebinizin bir kopyasını size, bir kopyasını da talep gönderdiğiniz
@@ -94,6 +104,11 @@ export default {
           error: [],
           show_error: false,
         },
+        requester_name_surname: {
+          value: null,
+          error: [],
+          show_error: false,
+        },
         requester_organization_name: {
           value: null,
           error: [],
@@ -114,6 +129,7 @@ export default {
             value =>  !!value || "Kişisel verinizin işlenmesini onaylamalısınız."
         ],
         error_response: null,
+        error_status: null,
         show_error_responses: false,
         success_dialog: false,
       }
@@ -146,6 +162,7 @@ export default {
         related_facility: this.facility.id,
         requester_email_address: this.requester_email_address.value,
         requester_phone_number: this.requester_phone_number.value,
+        requester_name_surname: this.requester_name_surname.value,
         requester_organization_name: this.requester_organization_name.value,
         message: this.message.value,
         data_process_permission: this.data_process_permission.value
@@ -157,7 +174,11 @@ export default {
           this.success_dialog = true
           console.log(this.response)
         })
-        .catch(error => {this.error_response = error.response.data})
+        .catch(error => {
+          this.error_response = error.response.data
+          this.error_status = error.response.status
+          console.log(error.response.status)
+        })
     },
   },
   watch: {

@@ -10,13 +10,16 @@
         <v-layout column fill-height>
           <v-list dense>
 
-          <v-list-item class="px-2 primary-accent-4" to="/" >
+          <v-list-item three-line class="px-2 primary-accent-4" to="/" >
   <!--          <router-link to="/">-->
               <v-list-item-avatar>
-                <v-icon color="primary">mdi-map</v-icon>
+                <v-img contain src="/logos/gom-logo.png"></v-img>
+<!--                <v-icon color="primary">mdi-map</v-icon>-->
               </v-list-item-avatar>
-              <v-list-item-title class="px-2">
-                Gençlik Örgütleri Haritası
+              <v-list-item-title style="font-size: 20px; font-family: Futura;font-weight: 500; line-height: 24px; letter-spacing: 2px"  class="px-2">
+                <span style="color: #01af9c">Gençlik</span> <br>
+                <span style="color: #FF5013;">Örgütleri</span> <br>
+                <span style="color: #2F324E;">Haritası</span>
 
               </v-list-item-title>
   <!--          </router-link>-->

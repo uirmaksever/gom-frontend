@@ -150,6 +150,8 @@ export default {
       facilities: [],
       facility_select: [],
       user_changed_filter: false,
+      org_map: null,
+      org_list: null,
       tab: "org_map",
       active_organization: null,
     }

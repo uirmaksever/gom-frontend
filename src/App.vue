@@ -7,6 +7,17 @@
       <v-main>
         <router-view :key="$route.fullPath"></router-view>
       </v-main>
+      <v-btn
+        to="new"
+        v-if="$route.path !== '/new'"
+        class="primary"
+        elevation="2"
+        fab
+        raised
+        text
+        fixed right bottom>
+        <v-icon large>mdi-plus</v-icon>
+      </v-btn>
     </v-container>
   </v-app>
 

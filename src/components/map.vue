@@ -2,7 +2,8 @@
   <div>
     <l-map
       style="height: 80vh; width: 100%; z-index: 0"
-      :zoom="zoom"
+      :zoom="zoom.default_zoom"
+      :minZoom="zoom.min_zoom"
       :center="center"
       @update:zoom="zoomUpdated"
       @update:center="centerUpdated"
@@ -10,24 +11,39 @@
       ref="organizations_map"
     >
       <l-tile-layer :url="url"></l-tile-layer>
-      <v-marker-cluster :options="{maxClusterRadius: 1, backgroundColor: 'white'}">
-        <l-circle-marker
+      <v-marker-cluster :options="cluster_options">
+<!--        <l-circle-marker-->
+<!--          v-for="organization in organizations"-->
+<!--          :key="organization.id"-->
+<!--          :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"-->
+<!--          :color=fillColor-->
+<!--          :fill-color=borderColor-->
+<!--          :fill-opacity=dot.fill_opacity-->
+<!--          :radius=dot.radius-->
+<!--          :weight=dot.weight-->
+<!--          :stroke=true-->
+<!--          v-model="active_organization"-->
+<!--          v-on:click="focusOrganizationInList(organization.id)"-->
+<!--        >-->
+<!--          <l-popup>-->
+<!--            <a v-bind:href="'organizations/' + organization.id">{{ organization.organization_name }}</a>-->
+<!--          </l-popup>-->
+<!--        </l-circle-marker>-->
+        <l-marker
           v-for="organization in organizations"
           :key="organization.id"
           :lat-lng="[organization.location.coordinates[1], organization.location.coordinates[0]]"
-          :color=fillColor
-          :fill-color=borderColor
-          :fill-opacity=dot.fill_opacity
-          :radius=dot.radius
-          :weight=dot.weight
-          :stroke=true
           v-model="active_organization"
-          v-on:click="focusOrganizationInList(organization.id)"
-        >
+          v-on:click="focusOrganizationInList(organization.id)">
+          <l-icon :icon-size="icon.icon_size"
+                  :icon-anchor="icon.icon_anchor"
+                  :popup-anchor="icon.popup_anchor"
+                  :icon-url="icon.icon_url"
+          ></l-icon>
           <l-popup>
             <a v-bind:href="'organizations/' + organization.id">{{ organization.organization_name }}</a>
           </l-popup>
-        </l-circle-marker>
+        </l-marker>
       </v-marker-cluster>
 <!--      <l-control position="bottomleft" v-if="active_organization">-->
 <!--        <v-card>-->
@@ -40,13 +56,13 @@
 <!--        </v-card>-->
 <!--      </l-control>-->
     </l-map>
-
+    <v-banner single-line rounded class="text--secondary text-sm-subtitle-1">Konum bilgisi yaklaşıktır.</v-banner>
   </div>
 </template>
 
 <script>
-import {LMap, LTileLayer, LCircleMarker, LPopup} from 'vue2-leaflet';
-import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
+import {LMap, LTileLayer, LMarker, LPopup, LIcon} from 'vue2-leaflet';
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 // import {ChoroplethLayer } from 'vue-choropleth'
 
 // import axios from 'axios';
@@ -56,15 +72,20 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    LCircleMarker,
+    LMarker,
     LPopup,
+    LIcon,
     'v-marker-cluster': Vue2LeafletMarkerCluster
     // 'l-choropleth-layer': ChoroplethLayer
   },
   data () {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 6,
+      zoom: {
+        default_zoom: 6,
+        // max_zoom: 6,
+        min_zoom: 6,
+      },
       center: [38.9637, 35.2433],
       bounds: null,
       districts: [],
@@ -75,13 +96,18 @@ export default {
       fillColor: "white",
       borderColor: "#FF5013",
       choropleth_value: {value: "total_organizations", key: "org amount"},
-      active_organization: null,
+      icon: {
+        icon_size: [20,30],
+        icon_anchor: [10,25],
+        popup_anchor: [0, -20],
+        icon_url: "/icons/marker.png"
+      },
       dot: {
         radius: 7,
         weight: 2,
         fill_opacity: 1,
       },
-
+      cluster_options: {maxClusterRadius: 20, backgroundColor: 'white'},
     };
   },
   props: {
@@ -116,7 +142,7 @@ export default {
   },
   methods: {
     zoomUpdated (zoom) {
-      this.zoom = zoom;
+      this.zoom.default_zoom = zoom;
     },
     centerUpdated (center) {
       this.center = center;

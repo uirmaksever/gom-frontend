@@ -73,6 +73,16 @@
 
           <v-spacer></v-spacer>
           <v-list>
+            <v-divider></v-divider>
+            <v-list-item href="http://fes-tuerkei.org/pages/tuerkce/giris-sayfasi.php" target="_blank">
+              <v-list-item-icon class="align-self-center">
+                <v-img contain width="40" src="/logos/fes-logo.png"></v-img>
+
+              </v-list-item-icon>
+              <v-list-item-content class="text--secondary text-sm-subtitle-2">Bu websitesinde ifade bulan görüşler, Friedrich-Ebert-Stiftung Derneği’nin
+                görüşleri ile örtüşmek zorunda değildir</v-list-item-content>
+            </v-list-item>
+            <v-divider></v-divider>
             <v-list-item href="https://www.go-for.org/" target="_blank">
               <v-list-item-icon>
                 <v-img contain width="40" src="/logos/gofor-logo-short.png"></v-img>

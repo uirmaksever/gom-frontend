@@ -8,8 +8,8 @@
         <router-view :key="$route.fullPath"></router-view>
       </v-main>
       <v-btn
-        to="new"
-        v-if="$route.path !== '/new'"
+        href="https://forms.gle/KyoEkCvCUbgHuk858"
+        target="_blank"
         class="primary"
         elevation="2"
         fab

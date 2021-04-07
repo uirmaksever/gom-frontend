@@ -18,7 +18,12 @@
         </v-list-item>
       </v-card>
     </v-col>
-
+    <v-overlay :value="loading">
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -30,12 +35,14 @@ export default {
   data () {
     return {
       provinces: [],
+      loading: true,
     }
   },
   mounted() {
     ProvinceNameDataService.getAll()
       .then(response => {
         this.provinces = response.data;
+        this.loading = false;
       })
   },
 }

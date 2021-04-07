@@ -38,8 +38,9 @@
             attach
             clearable
             label="İller"
-            class="px-5">
-          </v-select>
+            class="px-5"
+            :loading="filters_loading.provinces"
+          ></v-select>
 
           <v-select
             v-model="thematic_field_select"
@@ -51,8 +52,8 @@
             chips
             clearable
             class="px-5"
-            >
-          </v-select>
+            :loading="filters_loading.thematic_fields"
+          ></v-select>
 
           <v-select
             v-model="facility_select"
@@ -64,8 +65,8 @@
             chips
             clearable
             class="px-5"
-            >
-          </v-select>
+            :loading="filters_loading.facilities"
+          ></v-select>
         </v-card>
         <v-card rounded-lg elevation="5">
           <v-banner single-line>
@@ -87,7 +88,7 @@
 
         </v-tabs>
           <v-divider></v-divider>
-          <v-tabs-items v-model="tab">
+          <v-tabs-items v-model="tab" touchless>
           <v-tab-item :key="org_map">
             <Map v-bind:organizations="get_organizations"
                  @org-pin-clicked="change_active_organization"
@@ -139,6 +140,11 @@ export default {
     return {
       organizations: [],
       organizations_loading: true,
+      filters_loading: {
+        provinces: true,
+        thematic_fields: true,
+        facilities: true,
+      },
       // Filter
       provinces: [],
       thematic_fields: [],
@@ -167,14 +173,17 @@ export default {
     ProvinceDataService.getAll()
       .then(response => {
         this.provinces = response.data;
+        this.filters_loading.provinces = false;
       })
     ThematicFieldDataService.getAll()
       .then(response => {
         this.thematic_fields = response.data;
+        this.filters_loading.thematic_fields = false;
       })
     FacilityDataService.getAll()
       .then(response => {
         this.facilities = response.data;
+        this.filters_loading.facilities = false;
       })
   },
   methods: {

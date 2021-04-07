@@ -15,7 +15,12 @@
         </v-list-item>
       </v-card>
     </v-col>
-
+    <v-overlay :value="loading">
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -27,12 +32,14 @@ export default {
   data () {
     return {
       facilities: [],
+      loading: true,
     }
   },
   mounted() {
     FacilityDataService.getAll()
       .then(response => {
         this.facilities = response.data;
+        this.loading = false;
       })
   },
   watch: {

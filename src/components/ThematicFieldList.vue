@@ -7,9 +7,9 @@
       <v-divider class="my-5"></v-divider>
       <v-card tile>
         <v-list-item :key="thematic_field.id" v-for="thematic_field in thematic_fields" :to="'thematic_fields/' + thematic_field.id">
-          <v-list-item-icon>
-            <v-icon>mdi-{{ thematic_field.icon }}</v-icon>
-          </v-list-item-icon>
+<!--          <v-list-item-icon>-->
+<!--            <v-icon>mdi-{{ thematic_field.icon }}</v-icon>-->
+<!--          </v-list-item-icon>-->
           <v-list-item-content>
             <v-list-item-title>{{ thematic_field.thematic_field_name }}</v-list-item-title>
             <v-list-item-subtitle>{{ thematic_field.total_organizations }} Örgüt</v-list-item-subtitle>
@@ -21,7 +21,12 @@
         </v-list-item>
       </v-card>
     </v-col>
-
+    <v-overlay :value="loading">
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -33,12 +38,14 @@ export default {
   data () {
     return {
       thematic_fields: [],
+      loading: true,
     }
   },
   mounted() {
     ThematicFieldDataService.getAll()
       .then(response => {
         this.thematic_fields = response.data;
+        this.loading = false;
       })
   },
   watch: {

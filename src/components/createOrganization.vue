@@ -500,7 +500,7 @@
                   <v-expansion-panel-header>
                     Hata Metni: <code>{{ this.error_status }}</code>
                   </v-expansion-panel-header>
-                  <v-expansion-panel-content>
+                  <v-expansion-panel-content v-if="this.error_status !== 500">
                     <code>
                       <div>
                         {{ this.error_response }}

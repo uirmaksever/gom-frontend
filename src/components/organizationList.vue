@@ -38,13 +38,15 @@
                 {{ thematic_field.thematic_field_name }}
               </v-chip>
             </v-chip-group>
+            <template v-if="organization.comms_permissions">
+              <v-chip-group v-if="organization.comms_permissions.related_facilities !== null">
+                <v-chip v-for="facility in organization.related_facilities"
+                        v-bind:key="facility.id"
+                        :to="'/facilities/' + facility.id"
+                >{{ facility.facility_name }}</v-chip>
+              </v-chip-group>
+            </template>
 
-            <v-chip-group v-if="organization.comms_permissions.related_facilities">
-              <v-chip v-for="facility in organization.related_facilities"
-                      v-bind:key="facility.id"
-                      :to="'/facilities/' + facility.id"
-              >{{ facility.facility_name }}</v-chip>
-            </v-chip-group>
           </v-card-text>
 
 

@@ -168,6 +168,7 @@ export default {
           response => {
             this.organizations = response.data;
             this.organizations_loading = false;
+            this.get_gofor();
             },
       )
     ProvinceDataService.getAll()
@@ -195,6 +196,12 @@ export default {
       this.province_select = null
       this.facility_select = []
       this.filter_params = {};
+    },
+    get_gofor () {
+      let gofor = this.organizations.filter(org => org.organization_name === "Gençlik Örgütleri Forumu (GoFor)")
+      // It returns a list
+      this.active_organization = gofor[0]
+      console.log(gofor)
     }
   },
   computed: {

@@ -192,14 +192,31 @@ export default {
 @import "~leaflet.markercluster/dist/MarkerCluster.css";
 @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
-.marker-cluster-small {
+.marker-cluster-small, .marker-cluster-medium {
   background-color: white !important;
 }
 
-.marker-cluster-small div {
+.marker-cluster-small div, .marker-cluster-medium div {
   /*background-color: #FF5013 !important;*/
   background-color: #FF5013 !important;
   color: white !important;
   font-weight: 700;
+}
+
+.marker-cluster-medium {
+  width: 50px!important;
+  height: 50px!important;
+  border-radius: 25px!important;
+}
+
+.marker-cluster-medium div {
+  width: 40px!important;
+  height: 40px!important;
+  border-radius: 40px!important;
+}
+
+.marker-cluster-medium span {
+  line-height: 40px;
+  font-size: 16px;
 }
 </style>

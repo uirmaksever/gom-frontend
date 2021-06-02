@@ -217,6 +217,23 @@ export default {
 
 .marker-cluster-medium span {
   line-height: 40px;
+  font-size: 14px;
+}
+
+.marker-cluster-large {
+  width: 60px!important;
+  height: 60px!important;
+  border-radius: 30px!important;
+}
+
+.marker-cluster-large div {
+  width: 50px!important;
+  height: 50px!important;
+  border-radius: 50px!important;
+}
+
+.marker-cluster-large span {
+  line-height: 50px;
   font-size: 16px;
 }
 </style>

@@ -122,8 +122,8 @@
 import Map from "@/components/map";
 import OrganizationSingleCard from "@/components/OrganizationSingleCard";
 import OrganizationsList from "@/components/organizationList";
-// import OrganizationDataService from "@/services/organizationDataService";
-import OrganizationCachedDataService from "@/services/organizationCachedDataService";
+import OrganizationDataService from "@/services/organizationDataService";
+// import OrganizationCachedDataService from "@/services/organizationCachedDataService";
 // Filter
 import ProvinceDataService from "../services/provinceDataService";
 import ThematicFieldDataService from "../services/thematicFieldDataService";
@@ -163,7 +163,7 @@ export default {
     }
   },
   mounted() {
-    OrganizationCachedDataService.getAll()
+    OrganizationDataService.getAll()
       .then(
           response => {
             this.organizations = response.data;

@@ -12,6 +12,11 @@ export default new Router({
             component: () => import("./components/mainPage")
         },
         {
+            path: "/iframe",
+            name: "iframe-page",
+            component: () => import("./components/mainPage")
+        },
+        {
             path: "/about",
             name: "about-page",
             component: () => import("./components/AboutPage")

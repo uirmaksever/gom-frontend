@@ -1,10 +1,13 @@
 <template>
   <v-app>
     <v-container fluid>
-      <Sidebar></Sidebar>
+      <Sidebar v-if="$route.name !== 'iframe-page'"></Sidebar>
 <!--      <HeaderTop></HeaderTop>-->
 <!--      <v-divider></v-divider>-->
       <v-main>
+        <!-- <div>{{ $route.name !== "iframe-page" }}</div>
+
+        <div>{{ $route.matched.some(({ name }) => name === 'iframe') }}</div> -->
         <router-view :key="$route.fullPath"></router-view>
       </v-main>
       <v-btn
@@ -16,6 +19,7 @@
         text
         fixed right bottom>
         <v-icon large>mdi-plus</v-icon>
+        
       </v-btn>
     </v-container>
   </v-app>

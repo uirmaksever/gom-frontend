@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import ProvinceNameDataService from "@/services/provinceNameDataService";
+import ProvinceDataService from "@/services/provinceDataService";
 
 export default {
   name: "ProvincesList",
@@ -39,7 +39,7 @@ export default {
     }
   },
   mounted() {
-    ProvinceNameDataService.getAll()
+    ProvinceDataService.getAll()
       .then(response => {
         this.provinces = response.data;
         this.loading = false;

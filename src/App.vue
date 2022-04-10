@@ -11,6 +11,7 @@
         <router-view :key="$route.fullPath"></router-view>
       </v-main>
       <v-btn
+        v-if="$route.name !== 'iframe-page'"
         href="new"
         class="primary"
         elevation="2"
